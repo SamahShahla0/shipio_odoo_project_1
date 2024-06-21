@@ -1,0 +1,38 @@
+<odoo>
+
+    <record id="action_report_customer_location" model="ir.actions.report">
+        <field name="name">Customer Location</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">shipio.report_customer_location</field>
+        <field name="report_file">shipio.report_customer_location</field>
+        <field name="print_report_name">Customer Location</field>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_customer_location">
+        <t t-call="web.html_container">
+        <t t-set="docs" t-value="docs.with_context(proforma=True)"/>
+            <div class="page">
+                <h1>Customer Location Report</h1>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <td><t t-esc="doc.name"/></td>
+                                <td><t t-esc="doc.country_id.name"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

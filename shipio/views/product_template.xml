@@ -1,0 +1,42 @@
+<odoo>
+     <record id="shipio_product_template_only_form_view" model="ir.ui.view">
+        <field name="name">shipio.product.template.only.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='detailed_type']" position="before">
+                <field name="customer_id"/>
+            </xpath>
+            <xpath expr="//page[@name='general_information']" position="after">
+                 <page name="images" string="Product Images">
+                    <field name="image_ids" widget="one2many">
+                        <tree string="Images" editable="bottom">
+                            <field name="product_id" column_invisible="True"/>
+                            <field name="image" widget="image"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+             <xpath expr="//label[@for='volume']" position="before">
+                 <label for="height"/>
+                <div class="o_row" name="height">
+                    <field name="height" class="oe_inline"/><span>cm</span>
+                </div>
+                 <label for="width"/>
+                <div class="o_row" name="width">
+                    <field name="width" class="oe_inline"/><span>cm</span>
+                </div>
+                 <label for="length"/>
+                <div class="o_row" name="length">
+                    <field name="length" class="oe_inline"/><span>cm</span>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='property_stock_inventory']" position="after">
+                <field name="shipping_method"/>
+                <field name="storage_location" domain="[('usage','=', 'internal')]"/>
+                <field name="destination_location" domain="[('usage','=', 'internal')]"/>
+                <field name="delivery_address"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

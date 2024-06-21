@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_images,access_product.images,model_product_images,,1,1,1,1
+access_shipments,access_shipments,model_shipments,,1,1,1,1
+access_shipment_line,access_shipment.line,model_shipment_line,,1,1,1,1

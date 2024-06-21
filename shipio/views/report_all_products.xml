@@ -1,0 +1,40 @@
+<odoo>
+
+    <record id="action_report_all_products" model="ir.actions.report">
+        <field name="name">All Products</field>
+        <field name="model">product.template</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">shipio.report_all_products</field>
+        <field name="report_file">shipio.report_all_products</field>
+        <field name="print_report_name">All Products</field>
+        <field name="binding_model_id" ref="model_product_template"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_all_products">
+        <t t-call="web.html_container">
+        <t t-set="docs" t-value="docs.with_context(proforma=True)"/>
+            <div class="page">
+                <h1>All Products Report</h1>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Volume</th>
+                            <th>Shipping Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <td><t t-esc="doc.name"/></td>
+                                <td><t t-esc="doc.volume"/></td>
+                                <td><t t-esc="doc.shipping_method"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

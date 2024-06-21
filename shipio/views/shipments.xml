@@ -1,0 +1,75 @@
+<odoo>
+    <!-- Shipments Tree View -->
+    <record id="shipments_view_tree" model="ir.ui.view">
+        <field name="name">shipments.tree</field>
+        <field name="model">shipments</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="delivery_country" />
+                <field name="products_count" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Shipments Form View -->
+    <record id="shipments_view_form" model="ir.ui.view">
+        <field name="name">shipments.form</field>
+        <field name="model">shipments</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Print Barcode" type="object" name="action_open_label_type" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="delivery_country" />
+                        </group>
+                         <group>
+                            <field name="products_count" />
+                        </group>
+                    </group>
+                    <group colspan="8">
+                        <field name="lines" widget="one2many">
+                            <tree string="Lines" editable="bottom">
+                                <field name="shipment_id" column_invisible="True"/>
+                                <field name="product_id" domain="[('delivery_country', '=', parent.delivery_country)]"/>
+                                <field name="ship_barcode"/>
+                                <field name="customer_id"/>
+                                <field name="storage_location"/>
+                                <field name="destination_location"/>
+                                <field name="delivery_country" />
+                                <field name="delivery_address"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Shipments Action -->
+    <record id="shipments_action" model="ir.actions.act_window">
+        <field name="name">Shipments</field>
+        <field name="res_model">shipments</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Menu Item -->
+    <menuitem
+        id="shipments_menu"
+        name="Shipments"
+        parent="stock.menu_stock_root"
+        action="shipments_action"
+    />
+
+</odoo>
