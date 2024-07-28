@@ -8,7 +8,7 @@ _log = logging.getLogger(__name__)
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    customer_id = fields.Many2one('res.partner', required=True)
+    customer_id = fields.Many2one('res.partner')
     image_ids = fields.One2many(comodel_name='product.images', inverse_name='product_id')
     height = fields.Float()
     width = fields.Float()
